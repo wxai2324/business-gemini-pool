@@ -1380,6 +1380,10 @@
 
         async function pasteAccountJson() {
             try {
+                if (!navigator.clipboard || !navigator.clipboard.readText) {
+                    showToast('当前环境不支持剪贴板API，请使用HTTPS或手动粘贴', 'warning');
+                    return;
+                }
                 const text = await navigator.clipboard.readText();
                 document.getElementById('newAccountJson').value = text;
                 parseAccountJson(text);
@@ -1488,6 +1492,10 @@
          */
         async function pasteRefreshCookieJson() {
             try {
+                if (!navigator.clipboard || !navigator.clipboard.readText) {
+                    showToast('当前环境不支持剪贴板API，请使用HTTPS或手动粘贴', 'warning');
+                    return;
+                }
                 const text = await navigator.clipboard.readText();
                 document.getElementById('refreshCookieJson').value = text;
                 parseRefreshCookieJson(text);
